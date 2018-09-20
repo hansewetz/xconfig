@@ -1,0 +1,11 @@
+# notice: update to path where xconfig is installed
+XCONFIG_INSTALLDIR=@CMAKE_INSTALL_PREFIX@
+
+# C++ compile/link koptions
+COMPILEOPTS=-m64 -fPIC -Wall -pedantic -Werror -std=c++2a -Wno-deprecated -Wno-register -D_GLIBCXX_USE_CXX11_ABI=0
+
+example1: example1.cc
+	g++ -o example1 example1.cc $(COMPILEOPTS) -I$(XCONFIG_INSTALLDIR)/include -L$(XCONFIG_INSTALLDIR)/lib -lxconfigl
+
+clean:
+	$(RM) example1
