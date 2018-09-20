@@ -15,34 +15,7 @@ What things you need to install the software:
 * [cmake](https://cmake.org/download/) version 3.12.2 or higher
 * [libboost_program_options.so](https://www.boost.org/doc/libs/1_58_0/more/getting_started/unix-variants.html) 1.57 or higher
 
-## Installing xconfig
-Step by step recipie for compiling and installing **xconfig** (assuming gcc 9.x, cmake 3.12, libboost_program_options.so are installed):
-```bash
-$>mkdir xconfig && cd xconfig
-$>git clone https://github.com/hansewetz/xconfig.git .
-$>mkdir build && cd build
-$>export CXX=<full path to g++ compiler>            # /usr/bin/g++
-$>export CC=<full path to gcc compiler>             # /usr/bin/gcc
-$>cmake -DCMAKE_INSTALL_PREFIX=<install-path> ..
-$>make && make install
-```
-
-The installation directory is populated with:
-```bash
-.
-├── ...
-├── <install-path>
-│   ├── bin                    # xconfig binaries
-│   ├── lib                    # xconfig libraries
-│   ├── include                # xconfig C++ header files
-│   ├── examples               # sample programs
-└── ...
-```
-
-## Installing prerequisites
-A brief overview of the installation process for **gcc**, **cmake** and **libboost_program_options**
-
-### gcc 9.x
+#### Installing gcc 9.x
 <details><p>
   
 If you don't have gcc 8 or 9 installed, you can pull the latest of trunc and compile it:
@@ -76,7 +49,7 @@ make && make check && make install
 ```
 </p></details>
 
-### libboost_program_options.so.1.58.0
+#### Installing libboost_program_options.so.1.58.0
 <details><p>
   
 If you don't have **libboost_program_options** installed, please follow these instructions:
@@ -89,7 +62,7 @@ $>./b2 install
 ```
 </p></details>
   
-### cmake-3.12
+#### Installing cmake-3.12
 <details><p>
   
 If you don't have **cmake** version 3.12 or higher installed, please follow these instructions:
@@ -101,6 +74,31 @@ $>cmake -DCMAKE_INSTALL_PREFIX=${INSTALLHOME} ..
 $>make && make install
 ```
 </p></details>
+
+
+## Installing xconfig
+Step by step recipie for compiling and installing **xconfig** (assuming gcc 9.x, cmake 3.12, libboost_program_options.so are installed):
+```bash
+$>mkdir xconfig && cd xconfig
+$>git clone https://github.com/hansewetz/xconfig.git .
+$>mkdir build && cd build
+$>export CXX=<full path to g++ compiler>            # /usr/bin/g++
+$>export CC=<full path to gcc compiler>             # /usr/bin/gcc
+$>cmake -DCMAKE_INSTALL_PREFIX=<install-path> ..
+$>make && make install
+```
+
+The installation directory is populated with:
+```bash
+.
+├── ...
+├── <install-path>
+│   ├── bin                    # xconfig binaries
+│   ├── lib                    # xconfig libraries
+│   ├── include                # xconfig C++ header files
+│   ├── examples               # sample programs
+└── ...
+```
 
 # Getting Started with **xconfig**
 
