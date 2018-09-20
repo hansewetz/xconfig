@@ -23,6 +23,12 @@ If you don't have gcc 8 or 9 installed, you can pull the latest of trunc and com
 ```bash
 $>export INSTALLHOME=<your-installation-path>
 $>
+$># ------- install isl
+$># download isl-isl-0.19
+$>mkdir build && cd build
+$>.././configure --prefix=${INSTALLHOME}
+$>make && make check && make install
+$>
 $># ------- install gmp
 $># download gmp-6.1
 $>mkdir build && cd build
