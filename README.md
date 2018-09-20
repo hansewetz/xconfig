@@ -15,8 +15,9 @@ What things you need to install the software:
 * [cmake](https://cmake.org/download/) version 3.12.2 or higher
 * [libboost_program_options.so](https://www.boost.org/doc/libs/1_58_0/more/getting_started/unix-variants.html) 1.57 or higher
 
-#### Installing gcc 9.x
-<details><p>
+
+<details>
+  <summary>Installing gcc 9.x</summary>
   
 If you don't have gcc 8 or 9 installed, you can pull the latest of trunc and compile it:
 ```bash
@@ -47,10 +48,10 @@ $>mkdir build && cd build
 $>././configure --prefix=${INSTALLHOME}   --with-isl-include=${INSTALLHOME}/include --with-isl-lib=${INSTALLHOME}/lib --disable-multilib --with-gmp=${INSTALLHOME} --with-mpfr=${INSTALLHOME} --with-mpc=${INSTALLHOME}
 make && make check && make install
 ```
-</p></details>
+</details>
 
-#### Installing libboost_program_options.so.1.58.0
-<details><p>
+<details>
+  <summary>Installing libboost_program_options.so.1.58.0</summary>
   
 If you don't have **libboost_program_options** installed, please follow these instructions:
 ```bash
@@ -60,10 +61,10 @@ $> ./bootstrap.sh --prefix=${INSTALLHOME} --with-libraries=program_options
 $>./b2
 $>./b2 install
 ```
-</p></details>
+</details>
   
-#### Installing cmake-3.12
-<details><p>
+<details>
+  <summary>Installing cmake-3.12</summary>
   
 If you don't have **cmake** version 3.12 or higher installed, please follow these instructions:
 ```bash
@@ -73,7 +74,7 @@ $>mkdir build && cd build
 $>cmake -DCMAKE_INSTALL_PREFIX=${INSTALLHOME} ..
 $>make && make install
 ```
-</p></details>
+</details>
 
 
 ## Installing xconfig
