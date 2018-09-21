@@ -1,3 +1,4 @@
+/* (C) Copyright Hans Ewetz 2018. All rights reserved. */
 %{
 #include "xconfig/scanner.h"              // scanner class
 #include "xconfig/driver.h"               // driver class - we make callbacks to error functions in it

@@ -1,3 +1,4 @@
+// (C) Copyright Hans Ewetz 2018. All rights reserved.
 #include "xconfig/MmvmError.h"
 #include <iostream>
 #include <sstream>

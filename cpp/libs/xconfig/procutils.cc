@@ -1,3 +1,4 @@
+// (C) Copyright Hans Ewetz 2018. All rights reserved.
 #include "xconfig/procutils.h"
 #include <sstream>
 #include <vector>

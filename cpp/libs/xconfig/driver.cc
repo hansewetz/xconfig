@@ -1,3 +1,4 @@
+// (C) Copyright Hans Ewetz 2018. All rights reserved.
 #include "xconfig/driver.h"
 #include "parser.hh"
 #include "xconfig/scanner.h"

@@ -1,3 +1,4 @@
+// (C) Copyright Hans Ewetz 2018. All rights reserved.
 #pragma once
 #include "parser.hh"   // needed for 'yy::location'
 #include "xconfig/Symtab.h"

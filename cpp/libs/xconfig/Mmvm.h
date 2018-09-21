@@ -1,3 +1,4 @@
+// (C) Copyright Hans Ewetz 2018. All rights reserved.
 #pragma once
 #include "xconfig/MmvmError.h"
 #include "xconfig/Symtab.h"

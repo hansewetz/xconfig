@@ -1,3 +1,5 @@
+// (C) Copyright Hans Ewetz 2018. All rights reserved.
+#include "xconfig/version.h"
 #include "xconfig/XConfig.h"
 #include "xconfig/stringutils.h"
 #include <boost/program_options.hpp>
@@ -29,6 +31,10 @@ void usage(){
   std::cerr<<visible_options;
   std::exit(1);
 }
+void printversion(){
+  cout<<XCONFIG_VERSION_MAJOR<<"."<<XCONFIG_VERSION_MINOR<<endl;
+  std::exit(0);
+}
 // process cmd line params
 void cmdline(int argc,char*argv[]){
   // positional parameters
@@ -41,6 +47,7 @@ void cmdline(int argc,char*argv[]){
 
   // setup visible options (will show up in '--help')
   visible_options.add_options()("help,h","help");
+  visible_options.add_options()("version,v","print version number of xconfig and exit");
   visible_options.add_options()("program-dump,P","dump compiled code (for debug purpose)");
   visible_options.add_options()("memory-dump,M","dump memory (all variables) after compiling and running configuration (for debug purpose)");
   visible_options.add_options()("single-quote,S","enclose value in single quotes ('abc') instead of in couble quaotes (\"abc\")");
@@ -62,6 +69,7 @@ void cmdline(int argc,char*argv[]){
 
   // get command line parameters
   if(vm.count("help"))usage();
+  if(vm.count("version"))printversion();
   if(vm.count("program-dump"))program_dump=true;
   if(vm.count("memory-dump"))memory_dump=true;
   if(vm.count("single-quote"))single_quote=true;

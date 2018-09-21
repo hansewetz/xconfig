@@ -1,0 +1,6 @@
+// (C) Copyright Hans Ewetz 2018. All rights reserved.
+#pragma once
+namespace xconfig{
+constexpr const static int XCONFIG_VERSION_MAJOR=@XCONFIG_VERSION_MAJOR@;
+constexpr const static int XCONFIG_VERSION_MINOR=@XCONFIG_VERSION_MINOR@;
+}

@@ -1,3 +1,4 @@
+/* (C) Copyright Hans Ewetz 2018. All rights reserved. */
 %skeleton "lalr1.cc"                         // use newer c++ skeleton file
 %require "3.0.4"                             // minimum version of bison
 %defines                                     // write header containing token defines

@@ -1,3 +1,4 @@
+// (C) Copyright Hans Ewetz 2018. All rights reserved.
 #pragma once
 
 // forward decl - used in 'lex()' function
