@@ -131,7 +131,7 @@ system_userathost="hansewetz@dumbo"
 A short explanation:
   * environment variables are accessed using 'dollar' notation
   * bash commands can be executed using 'backquote' notation
-  * configuration variables are access using 'percentage' notation or directly with only the name
+  * configuration variables are accessed using 'percentage' notation or directly by the name
   * environment variables, configuration variables and bash commands can be evaluated using string interpolation by prefixing the string with an 'at' sign (@)
   * names can be scoped using namespaces
 
@@ -182,7 +182,7 @@ Not yet done
 
 # Development
 The following is planned:
-* add versioning to project (generate header file within the cmake build that contains version number)
+* add git commit SHA to 'version.h' file (via cmake)
 * implement Python based API
 * extend language to support repeated groups of structurally similar blocks of definitions
 * better/more documentation
