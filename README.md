@@ -130,7 +130,7 @@ system_userathost="hansewetz@dumbo"
 ```
 A short explanation:
   * environment variables are accessed using 'dollar' notation
-  * bash commands can be executed using 'backslash' notation
+  * bash commands can be executed using 'backquote' notation
   * configuration variables are access using 'percentage' notation or directly with only the name
   * environment variables, configuration variables and bash commands can be evaluated using string interpolation by prefixing the string with an 'at' sign (@)
   * names can be scoped using namespaces
