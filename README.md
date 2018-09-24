@@ -5,6 +5,60 @@
 
 **xconfig** is useable as it stands right now. Several improvemnets and extensions are planned. For example, a Python API mirroring the C++ API will be implemented. The configuration language will be updated to transparently support sequences of repeated blocks of information.
 
+# A small example
+
+## Example 1
+Type or copy/paste the following into **test1.cfg**:
+```bash
+namespace system{
+  user = $USER                           # user from environment variable
+  pwd = `pwd`                            # execute bash command - current work directory
+  userathost = @"%{user}@`hostname`"     # string interpolation - concatenate variable with `hostname`
+}
+```
+Print configuration using **xconfig**:
+```bash
+xconfig test1.cfg
+```
+The output is:
+```bash
+system_pwd="/home/user/hansewetz"
+system_user="hansewetz"
+system_userathost="hansewetz@dumbo"
+```
+A short explanation:
+  * environment variables are accessed using 'dollar' notation
+  * bash commands can be executed using 'backquote' notation
+  * configuration variables are accessed using 'percentage' notation or directly by the name
+  * environment variables, configuration variables and bash commands can be evaluated using string interpolation by prefixing the string with an 'at' sign (@)
+  * names can be scoped using namespaces
+
+## Example 2
+The following example shows how to use the **xconfig** C++ API:
+```C++
+#include "xconfig/XConfig.h"
+#include <iostream>
+using namespace std;
+using namespace xconfig;
+
+int main(){
+  // read and evaluate configuration file and print variables
+  XConfig xfg("test1.cfg");
+  for(auto&&[name,value]:xfg())cout<<name<<": "<<value<<endl;
+}
+```
+
+To compile/link the program:
+```bash
+g++ -o test1 test1.cc -m64 -fPIC -Wall -pedantic -Werror -std=c++2a -Wno-deprecated -Wno-register -D_GLIBCXX_USE_CXX11_ABI=0 -I<xconfig-install-path>/include -L<xconfig-install-path>/lib -lxconfigl
+```
+
+When running the program we get this output:
+```bash
+system.pwd: /home/user/hansewetz
+system.user: hansewetz
+system.userathost: hansewetz@dumbo
+```
 # Installation
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 See deployment for notes on how to deploy the project on a live system.
@@ -105,61 +159,6 @@ The installation directory is populated with:
 │   ├── include                # xconfig C++ header files
 │   ├── examples               # sample programs
 └── ...
-```
-
-# Getting Started with **xconfig**
-
-## Example 1
-Type or copy/paste the following into **test1.cfg**:
-```bash
-namespace system{
-  user = $USER                           # user from environment variable
-  pwd = `pwd`                            # execute bash command - current work directory
-  userathost = @"%{user}@`hostname`"     # string interpolation - concatenate variable with `hostname`
-}
-```
-Print configuration using **xconfig**:
-```bash
-xconfig test1.cfg
-```
-The output is:
-```bash
-system_pwd="/home/user/hansewetz"
-system_user="hansewetz"
-system_userathost="hansewetz@dumbo"
-```
-A short explanation:
-  * environment variables are accessed using 'dollar' notation
-  * bash commands can be executed using 'backquote' notation
-  * configuration variables are accessed using 'percentage' notation or directly by the name
-  * environment variables, configuration variables and bash commands can be evaluated using string interpolation by prefixing the string with an 'at' sign (@)
-  * names can be scoped using namespaces
-
-## Example 2
-The following example shows how to use the **xconfig** C++ API:
-```C++
-#include "xconfig/XConfig.h"
-#include <iostream>
-using namespace std;
-using namespace xconfig;
-
-int main(){
-  // read and evaluate configuration file and print variables
-  XConfig xfg("test1.cfg");
-  for(auto&&[name,value]:xfg())cout<<name<<": "<<value<<endl;
-}
-```
-
-To compile/link the program:
-```bash
-g++ -o test1 test1.cc -m64 -fPIC -Wall -pedantic -Werror -std=c++2a -Wno-deprecated -Wno-register -D_GLIBCXX_USE_CXX11_ABI=0 -I<xconfig-install-path>/include -L<xconfig-install-path>/lib -lxconfigl
-```
-
-When running the program we get this output:
-```bash
-system.pwd: /home/user/hansewetz
-system.user: hansewetz
-system.userathost: hansewetz@dumbo
 ```
 
 # Versioning
