@@ -3,7 +3,7 @@
 
 **xconfig** configurations integrates closely with a UNIX type environment. Access to environment variables as well as output from UNIX commands is transparenly reflected in the configuration language. A C++ API together with a command line program are used for extracting data from configuration files.
 
-**xconfig** is useable as it stands right now. Several improvemnets and extensions are planned. For example, a Python API mirroring the C++ API will be implemented. The configuration language will be updated to transparently support sequences of repeated blocks of information.
+Eventhough **xconfig** is useable as it stands right now, several improvments and extensions are planned. For example, a Python API mirroring the C++ API will be implemented. The configuration language will also be updated to transparently support sequences of repeated blocks of information.
 
 # A small example
 
