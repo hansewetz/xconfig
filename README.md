@@ -8,9 +8,7 @@ Eventhough **xconfig** is a first cut implementation of an idea that needs many 
 # A small example
 
 ## Example 1
-<details>
-  <summary>example 1</summary>
-  
+ 
 
 Type or copy/paste the following into **test1.cfg**:
 
@@ -27,7 +25,7 @@ namespace system{
   
 
 Print configuration using **xconfig**:
-  </p>
+
 ```bash
 xconfig test1.cfg
 ```
@@ -49,11 +47,8 @@ A short explanation:
   * environment variables, configuration variables and bash commands can be evaluated using string interpolation by prefixing the string with an 'at' sign (@)
   * names can be scoped using namespaces
 
-</details>
 
 ## Example 2
-<details>
-  <summary>example 2</summary>
 
 The following example shows how to use the **xconfig** C++ API:
 ```C++
@@ -85,7 +80,6 @@ system.user: hansewetz
 system.userathost: hansewetz@dumbo
 ```
 
-</details>
 
 # Installation
 
@@ -166,8 +160,6 @@ $>make && make install
 
 
 ## Installing xconfig
-<details>
-  <summary>Installing xconfig</summary>
   
 Step by step recipie for compiling and installing **xconfig** (assuming gcc 9.x, cmake 3.12, libboost_program_options.so are installed):
 ```bash
@@ -191,11 +183,9 @@ The installation directory is populated with:
 │   ├── examples               # sample programs
 └── ...
 ```
-</details>
 
 # Versioning
-<details>
-  <summary>versioning</summary>
+
 <p>
 The version of the <b>xconfig</b> API  is located in the <code>xconfig/version.h</code> header file. The version is specified through two <code>int</code> C++ variables:
 </p>
@@ -207,13 +197,11 @@ The version of the <b>xconfig</b> API  is located in the <code>xconfig/version.h
 <p>
 You can print the version of the current installation by executing: <code>xconfig --version</code>.
 </p>
-</details>
 
 # In depth: language, API and design
 
 ## Language
-<details>
-  <summary>language</summary>
+
 <p>
 The language follows a C like style where variable names consists of alphanumeric characters including the underscore character.
 Variables can be assigned string or integer values:
@@ -286,17 +274,15 @@ There are some restrictions to how variables can be used.
 A variable cannot be assigned to once it has a value.
 Neither can a namespace qualified variable be used on the left hand side of the assignment operator.
 </p>
-</details>
+
 
 ## API
-<details>
-  <summary>API</summary>
+
 Not yet done
-  </details>
+
 
 ## Design
-<details>
-  <summary>design</summary>
+
 <p>
 The design is relatively straight forward:
 <ul>
@@ -387,11 +373,10 @@ When interpolating strings I would like to be able to handle namespaces the same
 In order to reference variables without specifying the full namespace path, we need a table that contains information about the location of a variables within namespaces.
 This is done by building the table at compilation time and using it at runtime during string interpolation.
 </p>
-</design>
+
 
 # Development
-<details>
-  <summary>development</summary>
+
 <p>
 The following is planned:
 * add git commit SHA to 'version.h' file (via cmake)
@@ -400,7 +385,7 @@ The following is planned:
 * better/more documentation
 * possibly - port to lower version of gcc (i.e. C++11)
 </p>
-</details>
+
   
 # License
 This project is licensed under the MIT License - see the [LICENSE.md](https://choosealicense.com/licenses/mit/) file for details
