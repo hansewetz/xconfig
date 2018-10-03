@@ -3,7 +3,7 @@
 
 **xconfig** configurations integrates closely with a UNIX type environment. Access to environment variables as well as access to output from UNIX commands is transparenly reflected in the configuration language. A C++ API together with a command line program are used for extracting data from configuration files.
 
-Eventhough **xconfig** is a first cut implementation of an idea that needs many improvements it is useable as it stands right now. Several updates and extensions are planned. For example, a Python API mirroring the C++ API will be implemented. The configuration language will also be updated to transparently support sequences of repeated blocks of information.
+Eventhough **xconfig** is a first cut implementation of an idea that needs many improvements it is useable as it stands right now. Several updates and extensions are planned. For example, a Python API mirroring the C++ API will be implemented. The configuration language will also be updated to support various features.
 
 # A small example
 
@@ -186,94 +186,89 @@ The installation directory is populated with:
 
 # Versioning
 
-<p>
-The version of the <b>xconfig</b> API  is located in the <code>xconfig/version.h</code> header file. The version is specified through two <code>int</code> C++ variables:
-</p>
+
+The version of the <b>xconfig</b> API  is located in the <code>xconfig/version.h</code> header file. The version is specified by two <code>int</code> C++ variables:
+
 
 <ul>
   <li><code>constexpr const static int XCONFIG_VERSION_MAJOR</code></li>
   <li><code>constexpr const static int XCONFIG_VERSION_MINOR</code></li>
 </ul>
-<p>
+
 You can print the version of the current installation by executing: <code>xconfig --version</code>.
-</p>
+
 
 # In depth: language, API and design
 
 ## Language
 
-<p>
+
 The language follows a C like style where variable names consists of alphanumeric characters including the underscore character.
 Variables can be assigned string or integer values:
 
-<pre class="brush: bash">
+```bash
 user = "hansewetz"             # 'user' is a string
 maxthread = 20                 # 'maxthreads' is an integer
-</pre>
-</p>
+```
 
-<p>
+
+
 Environment variables are accessed using a <b>bash</b> style notation:
-<pre class="brush: bash">
+```bash
 user = ${USER}             # 'user' is assigned the value of environment variable 'USER'
 user1 = $USER              # works without braces also
-</pre>
-</p>
+```
 
-<p>
-Normal variables are accessed by dircetly using their name or by prefixing them with '%':
-<pre class="brush: bash">
+
+A configuratyion variable is accessed by directly using the variable name or by prefixing the name with '%':
+```bash
 user = @"${USER}"                        # 'user' is assigned the value of environment variable 'USER'
-userAtMachine= @"%{user}@`hostname -i`"  # access variable 'USER' inside a string
-</pre>
-</p>
+userAtMachine= @"%{user}@`hostname -i`"  # access configuration variable 'user' inside a string
+```
 
-<p>
-Commands can be executed by enclosing the the command inside back-quotes:
-<pre class="brush: bash">
+
+
+Commands can be executed by enclosing the the command in back-quotes:
+```bash
 machine = `hostname`   # get name of machine
-</pre>
-</p>
+```
 
 
-<p>
+
 The <i>plus</i> operator concatenate strings and adds integers:
-<pre class="brush: bash">
+```bash
 user = "hans"+"ewetz"         # user = "hansewetz"
 minthreads = 10
 maxthreads = minthreads + 8   # maxthreads = 18
-</pre>
-</p>
+```
 
-<p>
+
 An expression on the right hand side of the assignment operator can access a variable using <i>dot</i> separated namespaces:
-<pre class="brush: bash">
+```bash
 namespace system{
   user = $USER                     # user = "hansewetz"
   machine = `hostname -i`          # machine = "10.0.0.4"
 }
 userAtMachine = @"%{system.user}@%{system.machine}"   # userAtMachine = "hansewetz@10.0.0.4"
-</pre>
-</p>
+```
 
-<p>
+
 As the previous example showed strings can be interpolated.
-During interpolation environment variable, normal variables as well as commands are interpolated.
+During interpolation environment variables, normal variables as well as commands are evaluated.
 A variation of the previous example is shown here:
-<pre class="brush: bash">
+```bash
 namespace system{
   user = @"$USER"                  # hansewetz
   machine = `hostname -i`          # machine = "10.0.0.4"
 }
 userAtMachine = @"%{system.user}@%{system.machine}"   # userAtMachine = "hansewetz@10.0.0.4"
-</pre>
-</p>
+```
 
-<p>
-There are some restrictions to how variables can be used.
+
+There are some restrictions on how variables can be used.
 A variable cannot be assigned to once it has a value.
-Neither can a namespace qualified variable be used on the left hand side of the assignment operator.
-</p>
+A namespace qualified variable cannot be used on the left hand side of the assignment operator.
+
 
 
 ## API
@@ -283,7 +278,7 @@ Not yet done
 
 ## Design
 
-<p>
+
 The design is relatively straight forward:
 <ul>
   <li><b>bison</b>/<b>flex</b> is used for parsing the configuration</li>
@@ -291,52 +286,51 @@ The design is relatively straight forward:
   <li>execute the opcodes with the virtual machine</li>
   <li>use an <i>extractor</i> to retrieve data from the memory of the virtual machine</li>
 </ul>
-</p>
 
-<p>
+
+
 An overview of the design is shown here:
-  
 ![architecture-overview.png](images/architecture-overview.png)
 
-</p>
 
 
-<p>
+
+
 The <i>virtual machine</i> is implemented as a simple stack machine tailored specifically for this project.
 The name of the virtual machine is MMVM - <i>Mickey Mouse Virtual Machine</i>.
 The MMVM currently supports 13 opcodes.
 Among them are simple operation such as 'push value on stack' or 'store value in memory'.
 More complex operations such as 'evaluate a command in a shell and store output on stack' are also supported.
-</p>
 
-<p>
+
+
 One might wonder if it is not overkill to implement a VM just for parsing a configuration file.
 As it turns out, having a VM available makes it almost effortless to support and experiment with new features in the configuration language.
 Since the MMVM implementation is only around 330 lines of C++ code it can be implemented in only a few hours.
-</p>
 
-<p>
+
+
 The MMVM currently supports <b>string</b>s and <b>int</b>egers.
-The support is not extensive. Two integers can be added, two strings can be concatenated and integers can be added.
-</p>
+The support is not extensive. Two integers can be added, two strings can be concatenated and strings and integers can be added.
 
-<p>
+
+
 Evaluation of a configuration file is done in two steps:
 <ul>
   <li>compile the file into a program(generate a program consisting of op codes for MMVM)</li>
   <li>execute program (sequence of opcodes</li>
 </ul>
-</p>
 
-<p>
+
+
 Namespaces are used to scope variables.
 The full name of a variable is a series of <i>dot</i> separated namespaces followed by the name of the variable.
 It is not necessary to use the full name of a variable.
 When namespaces are left out, the compiler looks for the variable in the enclosing scope(s) .
 For example:
-</p>
 
-<p>
+
+
 <pre class="brush: bash">
 # test1.cfg
 a = 18
@@ -351,13 +345,13 @@ namespace ns{
   }
 }
 </pre>
-</p>
 
-<p>
-The output from executing: <b>xconfig test1.cfg</b>:
-</p>
 
-<p>
+
+The output from executing: <code>xconfig test1.cfg</code>:
+
+
+
 <pre class="brush: bash">
 a="18"
 ns_ns1_b="19"
@@ -365,26 +359,26 @@ ns_ns1_ns2_c="19"
 ns_ns1_ns2_d="19"
 ns_ns1_ns2_e="18"
 </pre>
-</p>
 
 
-<p>
+
+
 When interpolating strings I would like to be able to handle namespaces the same way as they are handled when referencing variables outside string interpolation.
 In order to reference variables without specifying the full namespace path, we need a table that contains information about the location of a variables within namespaces.
 This is done by building the table at compilation time and using it at runtime during string interpolation.
-</p>
+
 
 
 # Development
 
-<p>
+
 The following is planned:
 * add git commit SHA to 'version.h' file (via cmake)
 * implement Python based API
 * extend language to support repeated groups of structurally similar blocks of definitions
 * better/more documentation
 * possibly - port to lower version of gcc (i.e. C++11)
-</p>
+
 
   
 # License
