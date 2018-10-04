@@ -50,7 +50,7 @@ A short explanation:
 
 ## Example 2
 
-The following example shows how to use the **xconfig** C++ API:
+The following example shows how a configuration file can be read using the C++ API:
 ```C++
 #include "xconfig/XConfig.h"
 #include <iostream>
@@ -220,7 +220,7 @@ user1 = $USER              # works without braces also
 ```
 
 
-A configuratyion variable is accessed by directly using the variable name or by prefixing the name with '%':
+A configuration variable is accessed by directly using the variable name or by prefixing the name with '%':
 ```bash
 user = @"${USER}"                        # 'user' is assigned the value of environment variable 'USER'
 userAtMachine= @"%{user}@`hostname -i`"  # access configuration variable 'user' inside a string
@@ -279,12 +279,12 @@ Not yet done
 ## Design
 
 
-The design is relatively straight forward:
+The process of evaluating a configuration file is relatively straight forward:
 <ul>
   <li><b>bison</b>/<b>flex</b> is used for parsing the configuration</li>
-  <li>during parsing write opcodes for a <i>virtual machine</i></li>
-  <li>execute the opcodes with the virtual machine</li>
-  <li>use an <i>extractor</i> to retrieve data from the memory of the virtual machine</li>
+  <li>during parsing a program is written for a virtual machine
+  <li>the program is executed by the virtual machine</li>
+  <li>an <i>extractor</i> is used for retrieving information from the virtual machine</li>
 </ul>
 
 
@@ -311,7 +311,7 @@ Since the MMVM implementation is only around 330 lines of C++ code it can be imp
 
 
 The MMVM currently supports <b>string</b>s and <b>int</b>egers.
-The support is not extensive. Two integers can be added, two strings can be concatenated and strings and integers can be added.
+The support is not extensive - two integers can be added, two strings can be concatenated and strings and integers can be added.
 
 
 
