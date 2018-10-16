@@ -53,7 +53,7 @@ int main(){
         if constexpr(std::is_same_v<V,std::string>)cout<<v<<"[string]";
         else cout<<v<<"[int]";
       },value);
-      cout<<"]"<<endl;
+      cout<<endl;
     }
   }
   catch(exception const&e){
