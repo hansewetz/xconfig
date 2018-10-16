@@ -273,7 +273,7 @@ A namespace qualified variable cannot be used on the left hand side of the assig
 
 ## API
 
-Not yet done
+Not yet done - for right now, please see: ![example1](cpp/examples/example1/example1.cc)
 
 
 ## Design
