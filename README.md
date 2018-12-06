@@ -168,7 +168,7 @@ $>git clone https://github.com/hansewetz/xconfig.git .
 $>mkdir build && cd build
 $>export CXX=<full path to g++ compiler>            # /usr/bin/g++
 $>export CC=<full path to gcc compiler>             # /usr/bin/gcc
-$>cmake -DCMAKE_INSTALL_PREFIX=<install-path> ..
+$>cmake .. -DCMAKE_INSTALL_PREFIX=<install-path> ..
 $>make && make install
 ```
 
